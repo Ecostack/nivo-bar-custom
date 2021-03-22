@@ -516,7 +516,7 @@
         valueScale = _ref3.valueScale,
         indexScaleConfig = _ref3.indexScale,
         props = _objectWithoutProperties(_ref3, ["data", "keys", "layout", "minValue", "maxValue", "reverse", "width", "height", "padding", "valueScale", "indexScale"]);
-    var stackedData = d3Shape.stack().keys(keys).offset(d3Shape.stackOffsetDiverging)(data);
+    var stackedData = d3Shape.stack().keys(keys).offset(d3Shape.stackOffsetDiverging)(normalizeData(data, keys));
     var _ref4 = layout === 'vertical' ? ['y', [0, width]] : ['x', [height, 0]],
         _ref5 = _slicedToArray(_ref4, 2),
         axis = _ref5[0],
@@ -809,7 +809,7 @@
     }), withPropsOnChange(['indexBy'], function (_ref2) {
       var indexBy = _ref2.indexBy;
       return {
-        getIndex: core.getPropertyAccessor(indexBy)
+        getIndex: core.getAccessorFor(indexBy)
       };
     }), withPropsOnChange(['labelTextColor', 'theme'], function (_ref3) {
       var labelTextColor = _ref3.labelTextColor,

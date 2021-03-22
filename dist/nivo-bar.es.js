@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { TransitionMotion, spring } from 'react-motion';
-import { defsPropTypes, noop, withTheme, withDimensions, withMotion, getPropertyAccessor, getLabelGenerator, bindDefs, LegacyContainer, CartesianMarkers, SvgWrapper, getRelativeCursor, isCursorInRect, ResponsiveWrapper } from '@nivo/core';
+import { defsPropTypes, noop, withTheme, withDimensions, withMotion, getAccessorFor, getLabelGenerator, bindDefs, LegacyContainer, CartesianMarkers, SvgWrapper, getRelativeCursor, isCursorInRect, ResponsiveWrapper } from '@nivo/core';
 import { axisPropType, Grid, Axes, renderGridLinesToCanvas, renderAxesToCanvas } from '@nivo/axes';
 import { LegendPropShape, BoxLegendSvg, renderLegendToCanvas } from '@nivo/legends';
 import { computeScale, scalePropType, bandScalePropTypes } from '@nivo/scales';
@@ -521,7 +521,7 @@ var generateStackedBars = function generateStackedBars(_ref3) {
       valueScale = _ref3.valueScale,
       indexScaleConfig = _ref3.indexScale,
       props = _objectWithoutProperties(_ref3, ["data", "keys", "layout", "minValue", "maxValue", "reverse", "width", "height", "padding", "valueScale", "indexScale"]);
-  var stackedData = stack().keys(keys).offset(stackOffsetDiverging)(data);
+  var stackedData = stack().keys(keys).offset(stackOffsetDiverging)(normalizeData(data, keys));
   var _ref4 = layout === 'vertical' ? ['y', [0, width]] : ['x', [height, 0]],
       _ref5 = _slicedToArray(_ref4, 2),
       axis = _ref5[0],
@@ -814,7 +814,7 @@ var enhance$1 = (function (Component) {
   }), withPropsOnChange(['indexBy'], function (_ref2) {
     var indexBy = _ref2.indexBy;
     return {
-      getIndex: getPropertyAccessor(indexBy)
+      getIndex: getAccessorFor(indexBy)
     };
   }), withPropsOnChange(['labelTextColor', 'theme'], function (_ref3) {
     var labelTextColor = _ref3.labelTextColor,
